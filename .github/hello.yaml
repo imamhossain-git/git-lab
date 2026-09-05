@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print greeting
-        run: echo "Hello, World! এই মেসেজটি গিটহাব অ্যাকশন থেকে আসছ"
+        run: echo "Hello, World! এই মেসেজটি গিটহাব অ্যাকশন থেকে আসছ!"
