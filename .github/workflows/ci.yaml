@@ -5,21 +5,28 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-  workflow_dispatch:
+  workflow_dispatch: # manual button in Actions tab
 
 jobs:
+  # Job 1: Run Tests
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 20}
+        with:
+          node-version: 20
       - run: npm test
+      - name: Show result
+        run: echo "Tests passed!"
+
+  # Job 2: Build (runs only after test passes)
   build:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 20}
+        with:
+          node-version: 20
       - run: npm start

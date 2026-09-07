@@ -1,0 +1,12 @@
+{
+  "name": "learn-actions-app",
+  "version": "1.0.0",
+  "description": "Simple Node.js app for learning GitHub Actions",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test test.js",
+    "lint": "node --check index.js && echo 'lint ok'"
+  }
+}
