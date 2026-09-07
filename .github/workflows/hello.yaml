@@ -4,10 +4,16 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
-    
+
 jobs:
   say-hello:
     runs-on: ubuntu-latest
     steps:
       - name: say hello
         run: echo "Hello world!"
+      - name: check files
+        run: ls -la
+      - name: show data
+        run: date
+      - uses: actions/checkout@v3
+      - run: ls -la
