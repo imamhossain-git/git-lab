@@ -9,13 +9,22 @@ on:
   schedule:
     - cron: '0 0 * * *' # Runs every day at midninght
 jobs:
-  say-hello:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Say Hello
-        run: echo "Hello, world!"
-      - name: check files
-        run: ls -la
-      - name: show date
-        run: date
+      - uses: actions/checkout@v4
+      - run: npm test
+  
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm run build
+  deploy:
+    needs: [test, build]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm run deploy
