@@ -3,17 +3,19 @@ name: Hello world
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
-
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midninght
 jobs:
   say-hello:
     runs-on: ubuntu-latest
     steps:
-      - name: say hello
-        run: echo "Hello world!"
+      - uses: actions/checkout@v3
+      - name: Say Hello
+        run: echo "Hello, world!"
       - name: check files
         run: ls -la
-      - name: show data
+      - name: show date
         run: date
-      - uses: actions/checkout@v3
-      - run: ls -la
