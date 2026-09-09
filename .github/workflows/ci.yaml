@@ -18,4 +18,4 @@ jobs:
     steps:
       - run: echo "Hi ${{github.actor }} on ${{github.ref}}"
       - run: echo $GREETING #env variable from job-level
-      - run: echo ${{ secrets.MY_TOKEN }} #env variable from secrets
+      - run: echo ${{ runner.os}} #env variable from secrets
