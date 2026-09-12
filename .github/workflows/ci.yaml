@@ -8,7 +8,7 @@ on:
   workflow_dispatch: # manual button in Actions tab
 
 env: #global
-  NODE_ENV: development
+  NODE_ENV: production
 jobs:
   # Job 1: Run Tests
   test:
@@ -18,4 +18,4 @@ jobs:
     steps:
       - run: echo "Hi ${{github.actor }} on ${{github.ref}}"
       - run: echo $GREETING #env variable from job-level
-      - run: echo ${{ runner.os}} #env variable from secrets
+      - run: echo ${{ secrets.MY_TOKEN}} #env variable from 
