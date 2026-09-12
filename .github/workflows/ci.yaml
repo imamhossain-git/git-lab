@@ -6,20 +6,18 @@ on:
   # pull_request:
   #   branches: [main]
   workflow_dispatch: # manual button in Actions tab
+env:
+  NODE_ENV: development # you define
 
-env: #global
-  NODE_ENV: production
 jobs:
-  # Job 1: Run Tests
   test:
-    strategy:
-      matrix:
-        node: [18, 20, 22]
     runs-on: ubuntu-latest
+    env:
+      GREETING: Hello
     steps:
-      - uses: actions/checkout@v4  
-      - uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
-          cache: 'npm'
-      - run: npm test
+      - run: echo "Hi ${{ github.actor }} on ${{ github.ref }}" # github context
+      - run: echo ${{ env.GREETING }} # env context
+      - run: echo $GREETING # shell variable (same value, different time)
+      - env:
+          TOKEN: ${{ secrets.MY_TOKEN }} # secrets context
+        run: echo ${#TOKEN}
