@@ -8,7 +8,7 @@ on:
   workflow_dispatch: # manual button in Actions tab
 
 env: #global
-    NODE_ENV: development
+  NODE_ENV: development
 jobs:
   # Job 1: Run Tests
   test:
