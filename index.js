@@ -4,7 +4,7 @@ export function add(a, b) {
 }
 
 export function greet(name) {
-  return `Hi, ${name}!`;
+  return `Hello, ${name}!`;
 }
 
 // Run when called directly: node index.js
