@@ -10,14 +10,16 @@ env:
   NODE_ENV: development # you define
 
 jobs:
-  test:
+  deploy:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    env:
-      GREETING: Hello
     steps:
-      - run: echo "Hi ${{ github.actor }} on ${{ github.ref }}" # github context
-      - run: echo ${{ env.GREETING }} # env context
-      - run: echo $GREETING # shell variable (same value, different time)
-      - env:
-          TOKEN: ${{ secrets.MY_TOKEN }} # secrets context
-        run: echo ${#TOKEN}
+      - uses: actions/checkout@v3
+      - run: npm install
+        if: success()
+
+  notify:
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
+      - run: echo "build failed!"
