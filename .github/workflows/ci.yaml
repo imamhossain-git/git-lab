@@ -3,8 +3,8 @@ name: CI
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
+  # pull_request:
+  #   branches: [main]
   workflow_dispatch: # manual button in Actions tab
 
 env: #global
@@ -12,10 +12,12 @@ env: #global
 jobs:
   # Job 1: Run Tests
   test:
+    strategy:
+      matrix:
+        node: [18, 20, 22]
     runs-on: ubuntu-latest
-    env: #job-level
-      GREETING: Hello
     steps:
-      - run: echo "Hi ${{github.actor }} on ${{github.ref}}"
-      - run: echo $GREETING #env variable from job-level
-      - run: echo ${{ secrets.MY_TOKEN}} #env variable from 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm test
